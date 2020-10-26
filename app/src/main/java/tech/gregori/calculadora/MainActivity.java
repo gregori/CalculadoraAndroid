@@ -3,6 +3,7 @@ package tech.gregori.calculadora;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         newNumber = findViewById(R.id.newNumber);
         displayOperation = findViewById(R.id.operation);
 
+        // Botões de números
         Button button0 = findViewById(R.id.button0);
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
@@ -39,10 +41,40 @@ public class MainActivity extends AppCompatActivity {
         Button button9 = findViewById(R.id.button9);
         Button buttonDot = findViewById(R.id.buttonDot);
 
+        // Botões de operações
         Button buttonEquals = findViewById(R.id.buttonEquals);
         Button buttonDivide = findViewById(R.id.buttonDivide);
         Button buttonMultiply = findViewById(R.id.buttonMultiply);
         Button buttonMinus = findViewById(R.id.buttonMinus);
         Button buttonPlus = findViewById(R.id.buttonPlus);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button b = (Button) view; // converter a view genérica para o tipo botão
+                newNumber.append(b.getText().toString());
+            }
+        };
+
+        button0.setOnClickListener(listener);
+        button1.setOnClickListener(listener);
+        button2.setOnClickListener(listener);
+        button3.setOnClickListener(listener);
+        button4.setOnClickListener(listener);
+        button5.setOnClickListener(listener);
+        button6.setOnClickListener(listener);
+        button7.setOnClickListener(listener);
+        button8.setOnClickListener(listener);
+        button9.setOnClickListener(listener);
+        buttonDot.setOnClickListener(listener);
+
+        View.OnClickListener opListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button b = (Button) view; // converter a view genérica para o tipo botão
+                String op = b.getText().toString();
+                displayOperation.setText(op);
+            }
+        };
     }
 }
