@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 displayOperation.setText(op);
             }
         };
-
         buttonEquals.setOnClickListener(opListener);
         buttonDivide.setOnClickListener(opListener);
         buttonMultiply.setOnClickListener(opListener);
         buttonMinus.setOnClickListener(opListener);
         buttonPlus.setOnClickListener(opListener);
+
     }
 }
