@@ -73,7 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Button b = (Button) view; // converter a view genérica para o tipo botão
                 String op = b.getText().toString();
-                displayOperation.setText(op);
+                String value = newNumber.getText().toString();
+                if (value.length() != 0) { // se houver um valor em "newNumber"
+                    performOperation(value, op);
+                }
+
+                pendingOperation = op;
+                displayOperation.setText(pendingOperation);
             }
         };
         buttonEquals.setOnClickListener(opListener);
@@ -81,6 +87,41 @@ public class MainActivity extends AppCompatActivity {
         buttonMultiply.setOnClickListener(opListener);
         buttonMinus.setOnClickListener(opListener);
         buttonPlus.setOnClickListener(opListener);
+    }
 
+    private void performOperation(String value, String operation) {
+        if (operand1 == null) {
+            operand1 = Double.valueOf(value); // converte a string para double e armazena em operand1
+        } else {
+            operand2 = Double.valueOf(value);
+
+            if (pendingOperation.equals("=")) {
+                pendingOperation = operation;
+            }
+
+            switch (pendingOperation) {
+                case "=":
+                    operand1 = operand2;
+                    break;
+                case "/":
+                    if (operand2 == 0) {
+                        operand1 = 0.0;
+                    } else {
+                        operand1 /= operand2;
+                    }
+                    break;
+                case "*":
+                    operand1 *= operand2;
+                    break;
+                case "-":
+                    operand1 -= operand2;
+                    break;
+                case "+":
+                    operand1 += operand2;
+                    break;
+            }
+        }
+        result.setText(operand1.toString()); // campo de resultado recebe o valor de operand1 (result. da operação)
+        newNumber.setText(""); // campo em que os números são esvaziados é limpo
     }
 }
