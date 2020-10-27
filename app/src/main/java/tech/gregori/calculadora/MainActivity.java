@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Variáveis que contêm os operandos e as operações
     private Double operand1 = null;
-    private Double operand2 = null;
     private String pendingOperation = "=";
 
     @Override
@@ -97,31 +96,29 @@ public class MainActivity extends AppCompatActivity {
         if (operand1 == null) {
             operand1 = value;
         } else {
-            operand2 = value;
-
             if (pendingOperation.equals("=")) {
                 pendingOperation = operation;
             }
 
             switch (pendingOperation) {
                 case "=":
-                    operand1 = operand2;
+                    operand1 = value;
                     break;
                 case "/":
-                    if (operand2 == 0) {
+                    if (value == 0) {
                         operand1 = 0.0;
                     } else {
-                        operand1 /= operand2;
+                        operand1 /= value;
                     }
                     break;
                 case "*":
-                    operand1 *= operand2;
+                    operand1 *= value;
                     break;
                 case "-":
-                    operand1 -= operand2;
+                    operand1 -= value;
                     break;
                 case "+":
-                    operand1 += operand2;
+                    operand1 += value;
                     break;
             }
         }
